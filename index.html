@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elevenstoic — Build a life you remember</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #60a5fa;
+            --accent-gradient: linear-gradient(135deg, #60a5fa, #a78bfa);
+            --input-bg: rgba(255, 255, 255, 0.08);
+            --input-border: rgba(255, 255, 255, 0.15);
+            --radius-md: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Background image */
+        .bg-image {
+            position: fixed;
+            inset: 0;
+            background: url("Welcome screen - Background.png") center/cover no-repeat;
+            z-index: -1;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(167, 139, 250, 0.2));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+        }
+
+        .brand-logo svg {
+            width: 22px;
+            height: 22px;
+            color: var(--accent);
+        }
+
+        .brand-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            padding: 120px 40px 60px;
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* ===== PHONE MOCKUP ===== */
+        .phone-wrapper {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 40px;
+            /* box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5); */
+        }
+
+        /* ===== WAITLIST FORM ===== */
+        .waitlist-form-wrapper {
+            flex: 1;
+            width: 100%;
+            max-width: 400px;
+            background: rgba(10, 14, 26, 0.5);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            text-align: center;
+            background: radial-gradient(88.78% 759.64% at 45.98% 0%, #FFFFFF 25.72%, rgba(255, 255, 255, 0) 69.49%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text {
+            background: radial-gradient(88.78% 759.64% at 45.98% 0%, #FFFFFF 25.72%, rgba(255, 255, 255, 0) 69.49%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+        }
+
+        .submit-btn {
+            position: relative;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #f3e8ff 100%);
+            color: #0f172a;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 50px;
+            /* pill shape as seen in image */
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 8px;
+            box-shadow: 0px 4px 8px 0px #00000021,
+                2px 15px 15px 0px #0000001C,
+                4px 34px 21px 0px #00000012,
+                7px 61px 25px 0px #00000005,
+                11px 95px 27px 0px #00000000;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #bae6fd 0%, #e9d5ff 100%);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 10px 20px 0px rgba(186, 230, 253, 0.15),
+                4px 20px 20px 0px rgba(0, 0, 0, 0.1),
+                4px 34px 21px 0px rgba(0, 0, 0, 0.05);
+            color: #0f172a;
+        }
+
+        .submit-btn:hover::before {
+            opacity: 1;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ===== COUNTER ===== */
+        .waitlist-counter {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .counter-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            /* background: var(--accent-gradient); */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-variant-numeric: tabular-nums;
+            line-height: 1.2;
+        }
+
+        .counter-text {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #22c55e;
+            font-size: 1.05rem;
+            font-weight: 500;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 850px) {
+            .header {
+                padding: 30px 24px;
+            }
+
+            .main-content {
+                flex-direction: column;
+                gap: 50px;
+                padding: 100px 24px 60px;
+            }
+
+            .phone-wrapper {
+                max-width: 320px;
+                order: 1;
+            }
+
+            .waitlist-form-wrapper {
+                order: 2;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px;
+            }
+
+            .main-content {
+                padding: 90px 20px 60px;
+                gap: 40px;
+            }
+
+            .phone-wrapper {
+                max-width: 280px;
+            }
+
+            .waitlist-form-wrapper {
+                padding: 30px 20px;
+            }
+
+            .submit-btn {
+                padding: 14px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="bg-image"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="brand">
+            <span class="brand-name hero-title">Elevenstoic</span>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Phone Mockup -->
+        <div class="phone-wrapper">
+            <img src="Mock_Up_Watlist-removebg-preview.png" alt="Phone Mockup" />
+        </div>
+
+        <!-- Waitlist Form -->
+        <div class="waitlist-form-wrapper">
+            <h1 class="hero-title">Same Phone.<br>Different Life.</h1>
+            <form class="waitlist-form" id="waitlistForm">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Your name" required />
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email address" required />
+                </div>
+                <button type="submit" class="submit-btn">Join Waitlist</button>
+            </form>
+
+            <!-- Counter -->
+            <div class="waitlist-counter" id="waitlistCounter">
+                <div class="counter-number gradient-text" id="counterNumber">2,847</div>
+                <div class="counter-text gradient-text">people have joined</div>
+                <div class="live-indicator gradient-text">
+                    <span class="live-dot"></span>
+                    <span>Live updates</span>
+                </div>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✓ You're on the list. We'll be in touch soon.
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ===== WAITLIST COUNTER LOGIC =====
+        class WaitlistCounter {
+            constructor() {
+                this.counterElement = document.getElementById('counterNumber');
+                this.form = document.getElementById('waitlistForm');
+                this.successMessage = document.getElementById('successMessage');
+                this.counter = this.getStoredCount() || 2847;
+
+                this.init();
+            }
+
+            init() {
+                this.updateDisplay();
+                this.fetchActualCount();
+                this.simulateLiveUpdates();
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+            }
+
+            async fetchActualCount() {
+                // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+                const scriptURL = 'https://script.google.com/macros/s/AKfycby0KR7Oode83g-P97zBm6OL9IlvyKM0ux5w6JKSu0lqwZSZhPzY7lMafNFqyL58KzDgsA/exec';
+
+                try {
+                    const response = await fetch(scriptURL);
+
+                    console.log("data", data.count);
+                    if (data && typeof data.count === 'number') {
+                        this.counter = data.count > 0 ? data.count : this.counter;
+                        this.saveCount();
+                        this.updateDisplay();
+                    }
+                } catch (error) {
+                    console.log('Using fallback counter. Actual count fetch failed:', error.message);
+                }
+            }
+
+            getStoredCount() {
+                const stored = localStorage.getItem('elevenstoic_waitlist_count');
+                return stored ? parseInt(stored, 10) : null;
+            }
+
+            saveCount() {
+                localStorage.setItem('elevenstoic_waitlist_count', this.counter);
+            }
+
+            updateDisplay() {
+                this.animateNumber(this.counter);
+            }
+
+            animateNumber(target) {
+                const duration = 1000;
+                const start = parseInt(this.counterElement.textContent.replace(/,/g, ''), 10) || 0;
+                const increment = (target - start) / (duration / 16);
+                let current = start;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if ((increment > 0 && current >= target) || (increment < 0 && current <= target)) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    this.counterElement.textContent = Math.floor(current).toLocaleString();
+                }, 16);
+            }
+
+            increment() {
+                this.counter++;
+                this.saveCount();
+                this.updateDisplay();
+
+                this.counterElement.style.transform = 'scale(1.1)';
+                this.counterElement.style.transition = 'transform 0.2s ease';
+                setTimeout(() => {
+                    this.counterElement.style.transform = 'scale(1)';
+                }, 200);
+            }
+
+            simulateLiveUpdates() {
+                const randomInterval = () => Math.floor(Math.random() * 30000) + 15000;
+
+                const scheduleUpdate = () => {
+                    setTimeout(() => {
+                        if (Math.random() < 0.3) {
+                            this.increment();
+                        }
+                        scheduleUpdate();
+                    }, randomInterval());
+                };
+
+                scheduleUpdate();
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+
+                if (!name || !email) {
+                    alert('Please fill in both fields.');
+                    return;
+                }
+
+                // Disabling the button or showing a loading state (optional)
+                const btn = this.form.querySelector('.submit-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Joining...';
+                btn.disabled = true;
+
+                // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+                const scriptURL = 'https://script.google.com/macros/s/AKfycby0KR7Oode83g-P97zBm6OL9IlvyKM0ux5w6JKSu0lqwZSZhPzY7lMafNFqyL58KzDgsA/exec';
+
+                try {
+                    const formData = new FormData();
+                    formData.append('name', name);
+                    formData.append('email', email);
+
+                    // Sending to Google Sheets via Google Apps Script (no-cors prevents CORS errors on simple submits)
+                    await fetch(scriptURL, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors'
+                    });
+
+                    this.increment();
+                    this.form.style.display = 'none';
+                    this.successMessage.classList.add('show');
+                } catch (error) {
+                    console.error('Error!', error.message);
+                    alert('Something went wrong. Please try again.');
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            new WaitlistCounter();
+        });
+    </script>
+</body>
+
+</html>
