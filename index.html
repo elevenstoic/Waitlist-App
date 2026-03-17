@@ -36,7 +36,9 @@
         .bg-image {
             position: fixed;
             inset: 0;
-            background: url("bg.png") center/cover no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
             z-index: 0;
             pointer-events: none;
         }
@@ -498,116 +500,36 @@
             }
         }
 
-        @media (max-width: 760px) {
-            .bg-image {
-                background-image: url("Welcome screen - Background.png");
-                background-position: center center;
-                background-size: cover;
-            }
-
-            .hero-stack {
-                width: 100%;
-                margin-inline: auto;
-            }
-
-            .hero-title {
-                font-size: clamp(3rem, 12vw, 4.6rem);
-                line-height: 0.94;
-                margin-bottom: 16px;
-                width: fit-content;
-                max-width: 100%;
-                margin-inline: auto;
-            }
-
-            .hero-subtitle {
-                width: min(100%, 42ch);
-                font-size: 1.06rem;
-                margin-bottom: 28px;
-                margin-inline: auto;
-            }
-
-            .card-stage {
-                width: min(100%, 360px);
-                margin-inline: auto;
-            }
-
-            .waitlist-form-wrapper {
-                width: min(100%, 340px);
-                padding: 4px;
-            }
-
-            .waitlist-form {
-                grid-template-columns: minmax(0, 1fr) auto;
-                gap: 4px;
-                justify-content: center;
-            }
-
-            .submit-btn {
-                width: auto;
-                padding: 9px 10px;
-                font-size: 0.82rem;
-                justify-self: start;
-            }
-
-            .form-group input {
-                padding: 9px 10px;
-                font-size: 0.84rem;
-            }
-
-            .hero-subtitle {
-                margin-bottom: 30px;
-            }
-
-            .waitlist-counter {
-                flex-wrap: wrap;
-                justify-content: center;
-                row-gap: 4px;
-            }
-
-            .social-proof {
-                margin-top: 76px;
-                margin-inline: auto;
-            }
-        }
-
-        @media (max-width: 420px) {
-            .waitlist-form {
-                grid-template-columns: 1fr;
-            }
-
-            .submit-btn {
-                width: 100%;
-            }
-        }
     </style>
 </head>
 
-<body class="relative flex min-h-screen items-center justify-center overflow-x-hidden py-7">
-    <div class="bg-image"></div>
+<body class="relative flex min-h-screen items-start justify-center overflow-x-hidden pt-14 pb-10 md:items-center md:py-7">
+    <div class="bg-image md:hidden" style="background-image: url('Welcome screen - Background.png');"></div>
+    <div class="bg-image hidden md:block" style="background-image: url('bg.png');"></div>
     <div class="bg-glow"></div>
 
-    <main class="main-content w-full max-w-[1100px] px-5 sm:px-7">
-        <section class="hero-stack">
-            <h1 class="hero-title">
+    <main class="main-content w-full max-w-[1100px] px-6 sm:px-7">
+        <section class="hero-stack pt-4 md:pt-0">
+            <h1 class="hero-title !mb-4 !text-[3.35rem] !leading-[0.92] sm:!text-[4rem] md:!mb-[18px] md:!text-[clamp(2.5rem,6.4vw,5.8rem)] md:!leading-[0.98]">
                 <span class="hero-title-line">Same Phone.</span>
                 <span class="hero-title-line">Different Life.</span>
             </h1>
-            <p class="hero-subtitle">
+            <p class="hero-subtitle mx-auto !mb-7 w-full max-w-[22rem] !text-[1.03rem] !leading-[1.32] md:!mb-10 md:max-w-[56ch] md:!text-[clamp(1.02rem,1.8vw,1.22rem)]">
                 <span class="hero-subtitle-line">The Elevenstoic app is coming.</span>
                 <span class="hero-subtitle-line">Join the waitlist for early access.</span>
             </p>
 
-            <section class="card-stage">
-                <div class="waitlist-form-wrapper">
-                    <form class="waitlist-form" id="waitlistForm">
+            <section class="card-stage w-full max-w-[360px] md:max-w-[620px]">
+                <div class="waitlist-form-wrapper w-full max-w-[360px] !rounded-full !p-1 md:max-w-[500px] md:!p-[6px]">
+                    <form class="waitlist-form !grid-cols-[minmax(0,1fr)_auto] gap-[4px] md:!grid-cols-[1fr_auto] md:gap-[6px]" id="waitlistForm">
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your email address" required />
+                            <input class="!rounded-full !px-[12px] !py-[9px] !text-[0.82rem] md:!px-[18px] md:!py-3 md:!text-[0.98rem]" type="email" id="email" name="email" placeholder="Your email address" required />
                         </div>
-                        <button type="submit" class="submit-btn">Get Early Access</button>
+                        <button type="submit" class="submit-btn w-auto justify-self-start !rounded-full !px-[12px] !py-[9px] !text-[0.82rem] md:!px-6 md:!py-3 md:!text-[0.98rem]">Get Early Access</button>
                     </form>
                 </div>
 
-                <div class="waitlist-counter" id="waitlistCounter">
+                <div class="waitlist-counter flex-wrap justify-center gap-x-3 gap-y-1 md:flex-nowrap" id="waitlistCounter">
                     <div class="live-indicator gradient-text">
                         <span class="live-dot"></span>
                         <span>Live</span>
@@ -621,7 +543,7 @@
             </section>
         </section>
 
-        <p class="social-proof">#1 Inspirational Brand on Social Media</p>
+        <p class="social-proof mt-16 md:mt-28">#1 Inspirational Brand on Social Media</p>
 
         <section class="ticker" aria-label="Rotating inspirational notifications">
             <div class="ticker-track">
