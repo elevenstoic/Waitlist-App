@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Support | Elevenstoic</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --font-main: "Europa Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --text-primary: #eaf1ff;
+            --text-secondary: #a6b6d8;
+            --text-muted: #7487af;
+            --surface: rgba(16, 22, 36, 0.36);
+            --surface-border: rgba(220, 235, 255, 0.22);
+            --focus: rgba(149, 190, 255, 0.34);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-primary);
+            background: #020611;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        .bg-image {
+            position: fixed;
+            inset: 0;
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .page-shell {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: grid;
+            justify-items: center;
+            align-content: center;
+            padding: 28px 24px;
+        }
+
+        .main-content {
+            display: grid;
+            justify-items: center;
+            gap: 0;
+            text-align: center;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6.4vw, 5.8rem);
+            font-weight: 800;
+            line-height: 0.98;
+            letter-spacing: -0.03em;
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.42) 0%,
+                    #ffffff 18%,
+                    #ffffff 82%,
+                    rgba(255, 255, 255, 0.42) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .hero-title-line {
+            display: block;
+            white-space: nowrap;
+        }
+
+        .card-stage {
+            position: relative;
+            width: min(620px, 100%);
+            display: grid;
+            justify-items: center;
+            margin-inline: auto;
+            margin-top: 28px;
+        }
+
+        .card-stage::before {
+            content: '';
+            position: absolute;
+            inset: -40% -14% -42% -14%;
+            background:
+                radial-gradient(50% 44% at 22% 30%, rgba(128, 170, 246, 0.32), rgba(128, 170, 246, 0) 78%),
+                radial-gradient(52% 44% at 82% 76%, rgba(96, 136, 206, 0.34), rgba(96, 136, 206, 0) 78%);
+            filter: blur(22px);
+            pointer-events: none;
+        }
+
+        .support-link-shell {
+            position: relative;
+            overflow: hidden;
+            border-radius: 999px;
+            border: 1px solid rgba(213, 229, 255, 0.2);
+            background: rgba(19, 32, 62, 0.34);
+            backdrop-filter: blur(24px) saturate(145%);
+            -webkit-backdrop-filter: blur(24px) saturate(145%);
+            box-shadow:
+                0 20px 40px rgba(2, 6, 18, 0.44),
+                inset 0 1px 0 rgba(255, 255, 255, 0.22),
+                inset 0 -12px 24px rgba(5, 9, 18, 0.38);
+            padding: 6px;
+            width: min(100%, 500px);
+        }
+
+        .support-link-shell::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(138deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.02) 36%, rgba(255, 255, 255, 0) 50%);
+            pointer-events: none;
+        }
+
+        .support-link-inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 10px;
+            justify-items: center;
+            padding: 20px 18px;
+        }
+
+        .support-label {
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .support-copy {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.5;
+        }
+
+        .support-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 999px;
+            border: 1px solid rgba(223, 238, 255, 0.18);
+            background: rgba(30, 50, 89, 0.52);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .support-link:hover {
+            transform: translateY(-1px);
+            border-color: rgba(208, 230, 255, 0.62);
+            box-shadow: 0 0 0 3px var(--focus);
+        }
+
+        .support-link:focus-visible {
+            outline: none;
+            border-color: rgba(208, 230, 255, 0.62);
+            box-shadow: 0 0 0 3px var(--focus);
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 3.35rem;
+                line-height: 0.92;
+            }
+
+            .hero-title-line {
+                white-space: normal;
+            }
+
+            .support-link-shell {
+                width: min(100%, 360px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-image md:hidden" style="background-image: url('../Welcome screen - Background.png');"></div>
+    <div class="bg-image hidden md:block" style="background-image: url('../bg.png');"></div>
+
+    <main class="page-shell">
+        <section class="main-content">
+            <section class="hero-stack">
+                <h1 class="hero-title">
+                    <span class="hero-title-line">Questions.</span>
+                    <span class="hero-title-line">We’re here.</span>
+                </h1>
+
+                <section class="card-stage">
+                    <div class="support-link-shell">
+                        <div class="support-link-inner">
+                            <p class="support-label">Email Support</p>
+                            <p class="support-copy">For questions, issues, or anything account-related.</p>
+                            <a class="support-link" href="mailto:hello@elevenstoic.com">hello@elevenstoic.com</a>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>
