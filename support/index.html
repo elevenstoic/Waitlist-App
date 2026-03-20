@@ -64,6 +64,7 @@
             text-align: center;
             width: 100%;
             max-width: 1100px;
+            transform: translateY(-52px);
         }
 
         .hero-title {
@@ -93,7 +94,7 @@
             display: grid;
             justify-items: center;
             margin-inline: auto;
-            margin-top: 28px;
+            margin-top: 16px;
         }
 
         .card-stage::before {
@@ -109,6 +110,7 @@
 
         .support-link-shell {
             position: relative;
+            display: inline-flex;
             overflow: hidden;
             border-radius: 999px;
             border: 1px solid rgba(213, 229, 255, 0.2);
@@ -120,7 +122,7 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.22),
                 inset 0 -12px 24px rgba(5, 9, 18, 0.38);
             padding: 6px;
-            width: min(100%, 500px);
+            max-width: 100%;
         }
 
         .support-link-shell::before {
@@ -132,57 +134,38 @@
             pointer-events: none;
         }
 
-        .support-link-inner {
+        .support-link {
             position: relative;
             z-index: 1;
-            display: grid;
-            gap: 10px;
-            justify-items: center;
-            padding: 20px 18px;
-        }
-
-        .support-label {
-            font-size: 0.76rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
-
-        .support-copy {
-            color: var(--text-secondary);
-            font-size: 0.98rem;
-            line-height: 1.5;
-        }
-
-        .support-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
-            border-radius: 999px;
-            border: 1px solid rgba(223, 238, 255, 0.18);
-            background: rgba(30, 50, 89, 0.52);
+            max-width: 100%;
+            padding: 12px 14px;
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.02rem;
             font-weight: 700;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+            transition: transform 0.2s ease, color 0.2s ease;
         }
 
         .support-link:hover {
             transform: translateY(-1px);
-            border-color: rgba(208, 230, 255, 0.62);
-            box-shadow: 0 0 0 3px var(--focus);
+            color: #ffffff;
         }
 
         .support-link:focus-visible {
             outline: none;
-            border-color: rgba(208, 230, 255, 0.62);
             box-shadow: 0 0 0 3px var(--focus);
         }
 
         @media (max-width: 640px) {
+            .main-content {
+                transform: translateY(-28px);
+            }
+
             .hero-title {
                 font-size: 3.35rem;
                 line-height: 0.92;
@@ -192,8 +175,8 @@
                 white-space: normal;
             }
 
-            .support-link-shell {
-                width: min(100%, 360px);
+            .support-link {
+                white-space: normal;
             }
         }
     </style>
@@ -207,17 +190,13 @@
         <section class="main-content">
             <section class="hero-stack">
                 <h1 class="hero-title">
-                    <span class="hero-title-line">Questions.</span>
+                    <span class="hero-title-line">Questions?</span>
                     <span class="hero-title-line">We’re here.</span>
                 </h1>
 
                 <section class="card-stage">
                     <div class="support-link-shell">
-                        <div class="support-link-inner">
-                            <p class="support-label">Email Support</p>
-                            <p class="support-copy">For questions, issues, or anything account-related.</p>
-                            <a class="support-link" href="mailto:hello@elevenstoic.com">hello@elevenstoic.com</a>
-                        </div>
+                        <a class="support-link" href="mailto:hello@elevenstoic.com">hello@elevenstoic.com</a>
                     </div>
                 </section>
             </section>
